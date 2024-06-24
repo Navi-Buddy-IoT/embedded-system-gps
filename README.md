@@ -1,6 +1,6 @@
 # Embedded GPS Monitoring System
 
-<h1 align="center"> <img src="assets/gps-sensor.png" alt="Project Screenshot" height="350"> </h1>
+<h1 align="center"> <img src="https://media.discordapp.net/attachments/767151751744454666/1254712987089108992/gps-sensor.png?ex=667a7e07&is=66792c87&hm=7608a276c6e1d4bbdfa42bdc093267f05ec41108c08181c630b75a8ed24e9edf&=&format=webp&quality=lossless" alt="Project Screenshot" height="350"> </h1>
 
 ## Project Description
 
