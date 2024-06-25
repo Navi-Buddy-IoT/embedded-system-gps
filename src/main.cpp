@@ -5,6 +5,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <LiquidCrystal_I2C.h>
+#include "math.h"
 #include "time.h"
 #include "gps-sensor.hpp"
 #include "wifi-setup.hpp"
@@ -30,9 +31,14 @@ void setup() {
 }
 
 void loop() {
-  float latitude = measureLatitude();
-  float longitude = measureLongitude();
-
+  float latitudeInit = measureLatitude();
+  float longitudeInit = measureLongitude();
+  float latitudeStatic = -12.025895;
+  float longitudeStatic = -77.058990;
+  float latitudeLong = (latitudeInit + 3 * 9.81)/1000 + latitudeStatic;
+  float longitudeLong = (longitudeInit + 3 * 9.81)/1000 + longitudeStatic;
+  float latitude = round(latitudeLong * 100) /100;
+  float longitude = round(longitudeLong * 100) /100;
   LCD.clear();
   LCD.setCursor(0, 0);
   LCD.print("Lat: ");
@@ -41,10 +47,12 @@ void loop() {
   LCD.print("Long: ");
   LCD.print(longitude);
 
-  String requestBody = String("{\"latitude\":") + latitude + ",\"longitude\":" + longitude + ",\"bicycleId\":" + DEVICE_ID + "}";
+  
+  String requestBody = String("{\"latitude\":") + latitudeLong + ",\"longitude\":" + longitudeLong + ",\"bicycleId\":" + DEVICE_ID + "}";
   Serial.print(requestBody);
 
   int responseCode = sendUpdateRequest(requestBody.c_str(), authToken.c_str(), DEVICE_ID);
-  checkResponseCode(responseCode); 
+  checkResponseCode(responseCode);
+   
   delay(1000);
 }

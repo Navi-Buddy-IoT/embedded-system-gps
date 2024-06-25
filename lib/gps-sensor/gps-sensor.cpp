@@ -23,7 +23,7 @@ float measureLatitude(){
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
 
-  return a.acceleration.x;  // Example: Use accelerometer x value as latitude
+  return a.acceleration.x;
 }
 
 float measureLongitude(){
